@@ -7,9 +7,10 @@ import com.mongodb.stitch.android.services.mongodb.*;
 import com.mongodb.stitch.android.StitchClient;
 import org.bson.Document;
 
-import android.telephony.TelephonyManager;
-import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import java.util.UUID;
 
 import com.moodnetwork.MoodNetworkApplication;
 
@@ -19,7 +20,7 @@ public class MongoDB {
     private static final String STITCH_APP_ID = "moonnetwork-cpgmz";
     private static final String MONGO_SERVICE_PROVIDER = "mongodb-atlas";
     private static final String DATABASE_NAME = "moonnetwork";
-    private static final String DEVICE_IMEI = getDeviceIMEI();
+    private static final String USER_ID = getUserID();
 
     private static final String DB_COLLECTION_GPS = "GPS";
 
@@ -38,22 +39,28 @@ public class MongoDB {
         mDatabase = mMongoClient.getDatabase(DATABASE_NAME);
     }
 
-    private static String getDeviceIMEI(){
-        Context context = MoodNetworkApplication.getContext();
-        TelephonyManager teleManager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
-        return teleManager.getDeviceId();
+    private static String getUserID(){
+        SharedPreferences settings = MoodNetworkApplication.getContext().getSharedPreferences(TAG, 0);
+        String userId = "";
+        userId = settings.getString("userId", "");
+        if (userId.isEmpty()) {
+            userId = UUID.randomUUID().toString();
+            Editor editor = settings.edit();
+            editor.putString("userId", userId);
+            editor.commit();
+        }
+        return userId;
     }
 
     private void loginToMongoDB(){
         //for development purpose there is no password for the db
         //@TODO add authentication
         mStitchClient.logInWithProvider(new AnonymousAuthProvider());
-
     }
 
     public void insertGPSData(final float latitude, final float longitude) {
         final Document new_doc = new Document();
-        new_doc.put("userId", DEVICE_IMEI);
+        new_doc.put("userId", USER_ID);
         new_doc.put("latitude", latitude);
         new_doc.put("longitude", longitude);
         mDatabase.getCollection(DB_COLLECTION_GPS).insertOne(new_doc)
