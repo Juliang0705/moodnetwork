@@ -73,10 +73,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // startBackgroundServices();
+        startBackgroundServices();
     }
 
     private void startBackgroundServices() {
         getApplicationContext().startService(new Intent(this, GPSService.class));
+        getApplicationContext().startService(new Intent(this,AccelerometerService.class));
     }
 }

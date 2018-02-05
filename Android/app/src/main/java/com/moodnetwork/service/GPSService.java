@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.moodnetwork.database.MongoDB;
+
 /**
  * This is GPS service runs in the background collecting user's location
  */
@@ -26,6 +28,7 @@ public class GPSService extends Service {
         public void onLocationChanged(Location location) {
             //@TODO save the data
             Log.i(TAG, "GPS: " + location.toString());
+            MongoDB.getInstance().insertGPSData(location.getLatitude(), location.getLongitude());
         }
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -44,7 +47,7 @@ public class GPSService extends Service {
     @Override
     public void onCreate() {
         Log.i(TAG, "GPS service created");
-        mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override

@@ -58,7 +58,7 @@ public class MongoDB {
         mStitchClient.logInWithProvider(new AnonymousAuthProvider());
     }
 
-    public void insertGPSData(final float latitude, final float longitude) {
+    public void insertGPSData(final double latitude, final double longitude) {
         final Document new_doc = new Document();
         new_doc.put("userId", USER_ID);
         new_doc.put("latitude", latitude);
