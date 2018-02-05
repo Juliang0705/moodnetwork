@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.Manifest;
 
+import com.moodnetwork.database.MongoDB;
 import com.moodnetwork.service.*;
 
 import com.moodnetwork.R;
@@ -72,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 // result of the request.
             }
         }
-
-        startBackgroundServices();
+        //startBackgroundServices();
     }
 
     private void startBackgroundServices() {
