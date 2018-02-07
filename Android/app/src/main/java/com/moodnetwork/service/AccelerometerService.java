@@ -7,6 +7,8 @@ import android.hardware.*;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.moodnetwork.database.MongoDB;
+
 
 public class AccelerometerService extends Service {
     public static final String TAG = AccelerometerService.class.getCanonicalName();
@@ -48,6 +50,7 @@ public class AccelerometerService extends Service {
                 float y = event.values[1];
                 float z = event.values[2];
                 Log.i(TAG, "Accelerometer: x=" + x + " y=" + y + " z=" + z);
+                MongoDB.getInstance().insertAccelerometerData(x, y, z);
             }
 
             @Override
