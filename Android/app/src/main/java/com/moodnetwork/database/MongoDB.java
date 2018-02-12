@@ -113,14 +113,13 @@ public class MongoDB {
             }
         });
     }
-    public void insertAccelerometerData(final double x, final double y, final double z){
+    public void insertAccelerometerData(final double mag, final String startDate){
         accessMongoDB(new OnCompleteHandler() {
             @Override
             public void handle() {
                 final Document new_doc = getNewDocument();
-                new_doc.put("x", x);
-                new_doc.put("y", y);
-                new_doc.put("z", z);
+                new_doc.put("magnitude", mag);
+                new_doc.put("startDate", startDate);
                 mDatabase.getCollection(DB_COLLECTION_ACCELEROMETER)
                         .insertOne(new_doc)
                         .addOnCompleteListener(new OnCompleteListener<Document>() {

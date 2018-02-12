@@ -74,11 +74,15 @@ public class MainActivity extends AppCompatActivity {
                 // result of the request.
             }
         }
+        else {
+            // Permission has already been granted
+            startBackgroundServices();
+        }
     }
 
     private void startBackgroundServices() {
         Log.i(TAG,"Started background service");
         //getApplicationContext().startService(new Intent(this, GPSService.class));
-        //getApplicationContext().startService(new Intent(this,AccelerometerService.class));
+        getApplicationContext().startService(new Intent(this,AccelerometerService.class));
     }
 }
