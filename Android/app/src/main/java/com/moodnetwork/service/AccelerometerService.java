@@ -6,14 +6,9 @@ import android.content.Intent;
 import android.hardware.*;
 import android.os.IBinder;
 import android.util.Log;
-
+import android.os.CountDownTimer;
 import com.moodnetwork.database.MongoDB;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 
 public class AccelerometerService extends Service {
@@ -21,6 +16,53 @@ public class AccelerometerService extends Service {
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
+
+    private class AcclerometerEventListener extends CountDownTimer implements SensorEventListener {
+
+        private static final double MAGNITUDE_THRESHOLD = 1;
+        private static final long TIMEOUT_IN_SECS = 60;
+        private double mAccelerationSum = 0;
+        private int mAccelerationCount = 0;
+
+        AcclerometerEventListener() {
+            super(TIMEOUT_IN_SECS * 1000, TIMEOUT_IN_SECS * 1000);
+            start();
+        }
+        @Override
+        public void onFinish() {
+            double average = 0;
+            synchronized (this) {
+                average = mAccelerationSum / mAccelerationCount;
+                mAccelerationSum = 0;
+                mAccelerationCount = 0;
+            }
+            Log.i(TAG, "Acceleration for the past 1 mins is " + average);
+            if (average >= MAGNITUDE_THRESHOLD) {
+                MongoDB.getInstance().insertAccelerometerData(average);
+            }
+            start();
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            //ignore
+        }
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+            double magnitude = Math.sqrt(x * x + y * y + z * z);
+            synchronized (this) {
+                mAccelerationSum += magnitude;
+                mAccelerationCount += 1;
+            }
+        }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            Log.i(TAG, "Accelerometer accurancy changed: " + accuracy);
+        }
+    }
+
     @Override
     public void onCreate() {
         Log.i(TAG, "Accelerometer service created");
@@ -49,51 +91,9 @@ public class AccelerometerService extends Service {
     public void onDestroy(){
     }
     private void startRecordingAcceleration(){
-        mSensorManager.registerListener(new SensorEventListener() {
-            private static final double MAGNITUDE_THRESHOLD = 5;
-            private double mPreviousMagnitude = 0;
-            private ArrayList<Double> previousMagnitudes = new ArrayList<Double>();
-            private boolean isMoving = false;
-            private final DateFormat sDateFormatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US);
-            private String startDate;
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                float x = event.values[0];
-                float y = event.values[1];
-                float z = event.values[2];
-                double magnitude = Math.sqrt(x * x + y * y + z * z);
-                if (Math.abs(magnitude - mPreviousMagnitude) >= MAGNITUDE_THRESHOLD){
-                    Log.i(TAG, "Accelerometer: " + magnitude);
-                    if (isMoving) {
-                        previousMagnitudes.add(magnitude);
-                    } else {
-                        startDate = sDateFormatter.format(new Date());
-                        isMoving = true;
-                    }
-                    // MongoDB.getInstance().insertAccelerometerData(magnitude);
-                }
-                else {
-                    if (isMoving) {
-                        double averageMagnitude = 0;
-                        for (Double mag : previousMagnitudes) {
-                            averageMagnitude += mag.doubleValue();
-                        }
-                        averageMagnitude /= previousMagnitudes.size();
-
-                        MongoDB.getInstance().insertAccelerometerData(averageMagnitude, startDate);
-
-                        previousMagnitudes.clear();
-                        isMoving = false;
-                    }
-                }
-                mPreviousMagnitude = magnitude;
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-                Log.i(TAG, "Accelerometer accurancy changed: " + accuracy);
-            }
-        }, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(new AcclerometerEventListener(),
+                                        mSensor,
+                                        SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
 
