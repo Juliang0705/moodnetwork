@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.Manifest;
 import android.util.Log;
+import android.app.usage.*;
+import java.util.*;
 
 import com.moodnetwork.database.MongoDB;
 import com.moodnetwork.service.*;
@@ -83,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
     private void startBackgroundServices() {
         Log.i(TAG,"Started background service");
         //getApplicationContext().startService(new Intent(this, GPSService.class));
-        getApplicationContext().startService(new Intent(this,AccelerometerService.class));
+        //getApplicationContext().startService(new Intent(this,AccelerometerService.class));
+        AppUsageService.startService();
     }
+
 }
