@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.moodnetwork.MoodNetworkApplication;
 import com.moodnetwork.database.MongoDB;
 
 /**
