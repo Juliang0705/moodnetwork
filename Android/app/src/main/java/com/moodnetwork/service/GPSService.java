@@ -77,4 +77,8 @@ public class GPSService extends Service {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
     }
+    public static void startService() {
+        Context context = MoodNetworkApplication.getContext();
+        context.startService(new Intent(context,GPSService.class));
+    }
 }

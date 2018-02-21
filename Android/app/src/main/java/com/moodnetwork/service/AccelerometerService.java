@@ -7,6 +7,8 @@ import android.hardware.*;
 import android.os.IBinder;
 import android.util.Log;
 import android.os.CountDownTimer;
+
+import com.moodnetwork.MoodNetworkApplication;
 import com.moodnetwork.database.MongoDB;
 
 
@@ -94,6 +96,10 @@ public class AccelerometerService extends Service {
         mSensorManager.registerListener(new AcclerometerEventListener(),
                                         mSensor,
                                         SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    public static void startService() {
+        Context context = MoodNetworkApplication.getContext();
+        context.startService(new Intent(context,AccelerometerService.class));
     }
 }
 

@@ -1,6 +1,7 @@
 package com.moodnetwork.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.media.MediaRecorder;
 import android.media.MediaPlayer;
 import java.io.*;
 import android.net.Uri;
+
+import com.moodnetwork.MoodNetworkApplication;
 
 
 public class MicrophoneService extends Service implements MediaRecorder.OnInfoListener {
@@ -68,5 +71,9 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
         if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
             stopRecording();
         }
+    }
+    public static void startService() {
+        Context context = MoodNetworkApplication.getContext();
+        context.startService(new Intent(context,MicrophoneService.class));
     }
 }
