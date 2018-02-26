@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">moodnetwork</string>
+    <string name="statement">I am presently worrying over possible misfortunes.</string>
+    <string name="button_4">Very Much So</string>
+    <string name="button_3">Moderately So</string>
+    <string name="button_2">Somewhat</string>
+    <string name="button_1">Not at all</string>
+    <string name="q1">I feel calm.</string>
+    <string name="q2">I feel secure.</string>
+    <string name="q3">I feel at ease.</string>
+    <string name="q4">I feel upset.</string>
+    <string name="q5">I feel strained.</string>
+    <string name="q6">I feel nervous.</string>
+    <string name="q7">I feel comfortable.</string>
+    <string name="q8">I am tense.</string>
+    <string name="q9">I am jittery.</string>
+    <string name="q10">I am worried.</string>
+    <string name="q11">I feel confused.</string>
+    <string name="q12">I feel relaxed.</string>
+    <string name="q13">I feel content.</string>
+    <string name="q14">I am presently worrying over possible misfortunes.</string>
 </resources>

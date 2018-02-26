@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,8 +11,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2">
+
+        <ImageButton
+            android:id="@+id/survey_button"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            android:onClick="goToSurvey"
+            app:srcCompat="@drawable/ic_survey_action" />
+
+        <ImageButton
+            android:id="@+id/camera_button"
+            style="@android:style/Widget.DeviceDefault.ImageButton"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            android:onClick="openCamera"
+            app:srcCompat="@drawable/ic_camera_add" />
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            android:onClick="goToSettings"
+            app:srcCompat="@drawable/ic_settings" />
+
+        <ImageButton
+            android:id="@+id/help_button"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            app:srcCompat="@drawable/ic_help" />
+    </GridLayout>
+
 </RelativeLayout>
