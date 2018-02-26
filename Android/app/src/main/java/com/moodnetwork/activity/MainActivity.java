@@ -16,10 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moodnetwork.R;
 import com.moodnetwork.Settings;
+import com.moodnetwork.SurveyFinished;
 import com.moodnetwork.SurveyMain;
 import com.moodnetwork.service.AccelerometerService;
 
@@ -27,6 +29,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.moodnetwork.SurveyFinished.TIME_STAMP;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -110,6 +114,17 @@ public class MainActivity extends AppCompatActivity {
             // Permission has already been granted
             startBackgroundServices();
         }
+
+        //this will be pulled from the database instead of an intent
+        String message = "No Data";
+        Intent intent = getIntent();
+        if(intent.hasExtra(TIME_STAMP)) {
+            message = intent.getStringExtra(TIME_STAMP);
+        }
+        //this will stay the same when pulled from database
+        TextView textView = (TextView) findViewById(R.id.dateText);
+        textView.setText(message);
+
     }
     static final int REQUEST_IMAGE_CAPTURE = 1;
     String mCurrentPhotoPath;
@@ -129,52 +144,44 @@ public class MainActivity extends AppCompatActivity {
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
+    //handles the image data
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bitmap image = (Bitmap) data.getExtras().get("data");
             // do whatever you want with the image now}
         }
+
         Context context = getApplicationContext();
         CharSequence text = "Image Saved!";
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
+
+    //opens the camera
     public void openCamera(View view){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.CAMERA)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed; request the permission
+                //do we need to do anything here?
+            }
+            else {
+                //request permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CAMERA},
                         MY_PERMISSIONS_REQUEST_CAMERA);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
             }
-        }else{
-
-            System.out.println("open camera...");
+        }
+        else{
+            //already have permission
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
-
+            //this below saves the file to the users phone
                  /*File photoFile = null;
                     try {
                         photoFile = createImageFile();
@@ -195,10 +202,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    //start survey activity
     public void goToSurvey(View view){
         Intent intent = new Intent(this, SurveyMain.class);
         startActivity(intent);
     }
+
+    //start settings activity
     public void goToSettings(View view){
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
