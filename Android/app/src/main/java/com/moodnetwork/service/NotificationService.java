@@ -38,7 +38,6 @@ public class NotificationService {
     }
     public static void startService() {
         Log.i(TAG, "Starting Notification Service");
-
         Context context = MoodNetworkApplication.getContext();
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, NotificationReceiver.class);

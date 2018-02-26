@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
         //getApplicationContext().startService(new Intent(this,AccelerometerService.class));
         //AppUsageService.startService();
         //getApplicationContext().startService(new Intent(this,MicrophoneService.class));
-        NotificationService.startService();
+        //NotificationService.startService();
+        MicrophoneService.startService();
     }
 
 }

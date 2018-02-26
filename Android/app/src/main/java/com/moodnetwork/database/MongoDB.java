@@ -6,12 +6,15 @@ import com.google.android.gms.tasks.Task;
 import com.mongodb.stitch.android.auth.anonymous.AnonymousAuthProvider;
 import com.mongodb.stitch.android.services.mongodb.*;
 import com.mongodb.stitch.android.StitchClient;
+
+import org.bson.BsonBinary;
 import org.bson.Document;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.util.Base64;
 
 import java.text.DateFormat;
 import java.util.Locale;
@@ -31,6 +34,7 @@ public class MongoDB {
 
     private static final String DB_COLLECTION_GPS = "GPS";
     private static final String DB_COLLECTION_ACCELEROMETER = "Accelerometer";
+    private static final String DB_COLLECTION_MICROPHONE = "Microphone";
 
     private static final DateFormat sDateFormatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US);
 
@@ -97,11 +101,11 @@ public class MongoDB {
         accessMongoDB(new OnCompleteHandler() {
             @Override
             public void handle() {
-                final Document new_doc = getNewDocument();
-                new_doc.put("latitude", latitude);
-                new_doc.put("longitude", longitude);
+                final Document newDoc = getNewDocument();
+                newDoc.put("latitude", latitude);
+                newDoc.put("longitude", longitude);
                 mDatabase.getCollection(DB_COLLECTION_GPS)
-                        .insertOne(new_doc)
+                        .insertOne(newDoc)
                         .addOnCompleteListener(new OnCompleteListener<Document>() {
                             @Override
                             public void onComplete(Task<Document> task) {
@@ -117,15 +121,35 @@ public class MongoDB {
         accessMongoDB(new OnCompleteHandler() {
             @Override
             public void handle() {
-                final Document new_doc = getNewDocument();
-                new_doc.put("magnitude", mag);
+                final Document newDoc = getNewDocument();
+                newDoc.put("magnitude", mag);
                 mDatabase.getCollection(DB_COLLECTION_ACCELEROMETER)
-                        .insertOne(new_doc)
+                        .insertOne(newDoc)
                         .addOnCompleteListener(new OnCompleteListener<Document>() {
                             @Override
                             public void onComplete(@NonNull Task<Document> task) {
                                 if (!task.isSuccessful()) {
                                     Log.e(TAG, "insertAccelerometerData: " + task.getException().getMessage());
+                                }
+                            }
+                        });
+            }
+        });
+    }
+    public void insertMicrophoneData(final byte[] data) {
+        accessMongoDB(new OnCompleteHandler() {
+            @Override
+            public void handle() {
+                final Document newDoc = getNewDocument();
+                String base64Data = Base64.encodeToString(data, Base64.DEFAULT);
+                newDoc.put("audio", base64Data);
+                mDatabase.getCollection(DB_COLLECTION_MICROPHONE)
+                        .insertOne(newDoc)
+                        .addOnCompleteListener(new OnCompleteListener<Document>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Document> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.e(TAG, "insertMicrophoneData: " + task.getException().getMessage());
                                 }
                             }
                         });

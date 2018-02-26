@@ -11,11 +11,13 @@ import java.io.*;
 import android.net.Uri;
 
 import com.moodnetwork.MoodNetworkApplication;
+import com.moodnetwork.database.MongoDB;
 
 
 public class MicrophoneService extends Service implements MediaRecorder.OnInfoListener {
     public static final String TAG = MicrophoneService.class.getCanonicalName();
-    private static final int MAX_RECORD_DURATION_IN_SECS = 10;
+    private static final int MAX_RECORD_DURATION_IN_SECS = 60;
+    private static final long RECORD_GAP_IN_SECS = 300;
     private MediaRecorder mRecorder;
     @Override
     public void onCreate() {
@@ -61,10 +63,44 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
         }
     }
     private void stopRecording() {
+        Log.i(TAG, "Stop recording microphone now");
         mRecorder.stop();
         mRecorder.reset();
-        playAudio(getOutputFilePath());
-        Log.i(TAG, "Stop recording microphone now");
+        //playAudio(getOutputFilePath());
+        saveAudioToDatabase(getOutputFilePath());
+        rescheduleRecording();
+    }
+    private void rescheduleRecording(){
+        Log.i(TAG, "Rescheduling recording");
+        new Thread(){
+            @Override
+            public void run(){
+                try {
+                    Thread.sleep(RECORD_GAP_IN_SECS * 1000);
+                } catch (InterruptedException e) {
+                    Log.e(TAG, e.getMessage());
+                }
+                startRecording();
+            }
+        }.start();
+    }
+    private void saveAudioToDatabase(String filepath) {
+        File audioFile = new File(filepath);
+        if (audioFile.exists()) {
+            Log.i(TAG, "Length of file is " + audioFile.length());
+            try {
+                byte[] fileData = new byte[(int) audioFile.length()];
+                DataInputStream dis = new DataInputStream(new FileInputStream(audioFile));
+                dis.readFully(fileData);
+                dis.close();
+                MongoDB.getInstance().insertMicrophoneData(fileData);
+                audioFile.delete();
+            }catch(IOException e ) {
+                Log.e(TAG, e.getMessage());
+            }
+        } else{
+            Log.e(TAG, "File doesn't exist");
+        }
     }
     @Override
     public void onInfo(MediaRecorder mr, int what, int extra) {
