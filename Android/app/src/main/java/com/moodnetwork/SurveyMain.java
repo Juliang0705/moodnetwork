@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,15 +22,23 @@ public class SurveyMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_main);
     }
-    private void resetbuttons(){
+
+    protected void resetbuttons(){
+        //reset the button background color to gray
         findViewById(R.id.button2).setBackgroundColor(getResources().getColor(R.color.button));
         findViewById(R.id.button3).setBackgroundColor(getResources().getColor(R.color.button));
         findViewById(R.id.button4).setBackgroundColor(getResources().getColor(R.color.button));
         findViewById(R.id.button5).setBackgroundColor(getResources().getColor(R.color.button));
     }
-    private void getQuestion(int x){
+    protected void handleData(){
+        //get the question and answer and store both in the backend
+    }
+    protected void getQuestion(int x){
+        //get a new question add some code to
+        resetbuttons();
+        ProgressBar p = (ProgressBar) findViewById(R.id.progress);
+        p.setProgress(p.getProgress() + 25);
         TextView question = (TextView) findViewById(R.id.textView);
-
         String text = "";
         switch(x){
             case 0:
@@ -53,24 +62,26 @@ public class SurveyMain extends AppCompatActivity {
        ColorDrawable button =  (ColorDrawable) view.getBackground();
         if( button.getColor() == getResources().getColor(R.color.colorAccent)){
             //save value and go to the next question.
-            System.out.println("color same");
+            handleData();
             getQuestion(x);
             x++;
             if(x > 3){
                 Intent intent = new Intent(this, SurveyFinished.class);
                 startActivity(intent);
             }
-            resetbuttons();
+
         }
-        resetbuttons();
-        view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        if(tips){
-            Context context = getApplicationContext();
-            CharSequence text = "Double tap to submit answer";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            tips = false;
+        else {
+            resetbuttons();
+            view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            if (tips) {
+                Context context = getApplicationContext();
+                CharSequence text = "Double tap to submit answer";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                tips = false;
+            }
         }
 
     }
