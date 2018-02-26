@@ -12,12 +12,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:text="@string/statement"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <LinearLayout
@@ -35,7 +37,7 @@
             android:layout_alignTop="@+id/linearLayout"
             android:layout_weight="1"
             android:background="@color/button"
-            android:onClick="onbuttonClick"
+            android:onClick="onButtonClick"
             android:layout_margin="2dp"
             android:text="@string/button_4" />
 
@@ -48,7 +50,7 @@
             android:layout_weight="1"
             android:background="@color/button"
             android:layout_margin="2dp"
-            android:onClick="onbuttonClick"
+            android:onClick="onButtonClick"
             android:text="@string/button_3" />
 
         <Button
@@ -60,7 +62,7 @@
             android:layout_weight="1"
             android:background="@color/button"
             android:layout_margin="2dp"
-            android:onClick="onbuttonClick"
+            android:onClick="onButtonClick"
             android:text="@string/button_2" />
 
         <Button
@@ -72,7 +74,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:background="@color/button"
-            android:onClick="onbuttonClick"
+            android:onClick="onButtonClick"
             android:text="@string/button_1" />
     </LinearLayout>
 
