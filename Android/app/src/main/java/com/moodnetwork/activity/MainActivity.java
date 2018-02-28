@@ -1,7 +1,9 @@
 package com.moodnetwork.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,11 +15,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.moodnetwork.R;
 import com.moodnetwork.Settings;
@@ -75,6 +79,54 @@ public class MainActivity extends AppCompatActivity {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                     cameraFunctionality = false;
+
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.CAMERA)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Permission Needed")
+                                .setMessage("We recommend you allow camera permissions to assist with our research.")
+                                .setPositiveButton("OK",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                ActivityCompat.requestPermissions(MainActivity.this,
+                                                        new String[]{Manifest.permission.CAMERA},
+                                                        MY_PERMISSIONS_REQUEST_CAMERA);
+                                            }
+                                        })
+                                .setNegativeButton("Cancel", null)
+                                .create()
+                                .show();
+                    }
+                    else{
+                        // "Never ask again"
+                        Context context = getApplicationContext();
+                        CharSequence text = "Never ask again!";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
+                        Snackbar s = Snackbar.make(findViewById(R.id.main), "Camera permissions denied", Snackbar.LENGTH_LONG);
+                        s.setAction("LEARN MORE",
+                            new View.OnClickListener(){
+                                @Override
+                                public void onClick(View v) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setMessage("Open Settings, and turn on camera permissions for MoodChecker.")
+                                            .setPositiveButton("Open Settings",
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                                                        }
+                                                    })
+                                            .setNegativeButton("Cancel", null)
+                                            .create()
+                                            .show();
+                                }
+                        });
+                        s.show();
+                    }
                 }
                 return;
             }
@@ -147,16 +199,19 @@ public class MainActivity extends AppCompatActivity {
     //handles the image data
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bitmap image = (Bitmap) data.getExtras().get("data");
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == RESULT_OK) {
+                Bitmap image = (Bitmap) data.getExtras().get("data");
+            }
             // do whatever you want with the image now}
+
+            Context context = getApplicationContext();
+            CharSequence text = "Image Saved!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
 
-        Context context = getApplicationContext();
-        CharSequence text = "Image Saved!";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
     }
 
     //opens the camera
@@ -164,16 +219,10 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CAMERA)) {
-                //do we need to do anything here?
-            }
-            else {
                 //request permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CAMERA},
                         MY_PERMISSIONS_REQUEST_CAMERA);
-            }
         }
         else{
             //already have permission
