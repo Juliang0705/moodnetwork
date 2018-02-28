@@ -11,17 +11,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SurveyMain extends AppCompatActivity {
-    int[] used = {0,0,0,0};
+    int[] used = new int[14];
 
     //private variables
     private int questionToGet = 0; //represents the question we want to get
     private boolean tips = true; //turn off the tips for the rest of the survey
-    private int numQuestions = 4;//change to 10 for final application
+    private int numQuestions = 5;//change to 10 for final application
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_main);
+
+        TextView question = (TextView) findViewById(R.id.textView);
+        String text = "";
+        //set random question for the first question
+        //set as used so we don't grab it later on
     }
 
     //reset the background color of the buttons to normal

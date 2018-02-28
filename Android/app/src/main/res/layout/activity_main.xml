@@ -53,6 +53,7 @@
             android:layout_margin="2dp"
             android:layout_rowWeight="1"
             android:background="@color/button"
+            android:onClick="goToHelpPage"
             app:srcCompat="@drawable/ic_help" />
     </GridLayout>
 

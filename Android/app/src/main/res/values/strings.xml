@@ -19,4 +19,18 @@
     <string name="q12">I feel relaxed.</string>
     <string name="q13">I feel content.</string>
     <string name="q14">I am presently worrying over possible misfortunes.</string>
+    <string name="helpcontent">Mood Checker is an application for research purposes. The app will collect data for researchers
+        that will be used and analyzed in the future. By using Mood Checker you agree to sharing your data with these researchers.
+        You can disable some background activities at any time from the settings.
+        The survey is to be taken 3 times a day, and you will receive a notification when it is time to take it.
+        After completing the survey, you should take a picture of yourself.
+    </string>
+    <string name="survey">Survey</string>
+    <string name="photo">Photos</string>
+    <string name="about">About</string>
+    <string name="how_to_survey">Click on the icon to start the survey. You may move on to the next question by double tapping on your desired answer.
+        The progress bar at the top will show how many questions you have left. </string>
+    <string name="how_to_camera">Click on the camera icon to open the camera. Take a photo of your face including both the top of your head and
+        your chin in the picture. Approve the picture, and you will return to the home page.</string>
+
 </resources>
