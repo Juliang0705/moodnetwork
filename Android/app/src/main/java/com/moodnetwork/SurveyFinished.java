@@ -31,4 +31,10 @@ public class SurveyFinished extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
+
+    //prevent user from going back into the survey after completing it
+    @Override
+    public void onBackPressed() {
+        onButtonClick(findViewById(R.id.okaySurveyFinished));
+    }
 }

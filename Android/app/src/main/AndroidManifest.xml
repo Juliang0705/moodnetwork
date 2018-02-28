@@ -36,15 +36,7 @@
         <service android:name=".service.GPSService" />
         <service android:name=".service.AccelerometerService" />
 
-        <activity
-            android:name=".SurveyMain"
-            android:parentActivityName=".activity.MainActivity">
-
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
-        </activity>
+        <activity android:name=".SurveyMain"/>
         <activity
             android:name=".Settings"
             android:parentActivityName=".activity.MainActivity">
@@ -52,6 +44,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
         </activity>
+
+
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -63,7 +57,16 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".SurveyFinished"></activity>
+        <activity android:name=".SurveyFinished" />
+        <activity
+            android:name=".HelpPage"
+            android:parentActivityName=".activity.MainActivity">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

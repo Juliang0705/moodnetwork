@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RelativeLayout;
 
+import com.moodnetwork.HelpPage;
 import com.moodnetwork.R;
 import com.moodnetwork.Settings;
 import com.moodnetwork.SurveyFinished;
@@ -261,6 +262,11 @@ public class MainActivity extends AppCompatActivity {
     //start settings activity
     public void goToSettings(View view){
         Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+    //start help page activity
+    public void goToHelpPage(View view){
+        Intent intent = new Intent(this, HelpPage.class);
         startActivity(intent);
     }
     private void startBackgroundServices() {
