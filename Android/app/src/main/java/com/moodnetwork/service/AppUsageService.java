@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.moodnetwork.MoodNetworkApplication;
+import com.moodnetwork.database.MongoDB;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,12 +31,6 @@ public class AppUsageService extends JobService {
                     .queryUsageStats(UsageStatsManager.INTERVAL_DAILY, beginTime,
                             endTime);
             Log.i(TAG, "Usage size is " + queryUsageStats.size());
-            Collections.sort(queryUsageStats, new Comparator<UsageStats>() {
-                @Override
-                public int compare(UsageStats lhs, UsageStats rhs) {
-                    return (int) (rhs.getTotalTimeInForeground() - lhs.getTotalTimeInForeground());
-                }
-            });
             //@TODO add it to database
             for (int i = 0; i < Math.min(30, queryUsageStats.size()); ++i) {
                 UsageStats usage = queryUsageStats.get(i);
@@ -43,6 +38,7 @@ public class AppUsageService extends JobService {
                         ": total foreground time=" + usage.getTotalTimeInForeground());
             }
             jobFinished(params[0], true);
+            MongoDB.getInstance().insertAppUsageData(queryUsageStats);
             return null;
         }
     }

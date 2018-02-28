@@ -10,6 +10,7 @@ import com.mongodb.stitch.android.StitchClient;
 import org.bson.BsonBinary;
 import org.bson.Document;
 
+import android.app.usage.UsageStats;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.annotation.NonNull;
@@ -17,6 +18,10 @@ import android.util.Log;
 import android.util.Base64;
 
 import java.text.DateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.Date;
@@ -35,6 +40,7 @@ public class MongoDB {
     private static final String DB_COLLECTION_GPS = "GPS";
     private static final String DB_COLLECTION_ACCELEROMETER = "Accelerometer";
     private static final String DB_COLLECTION_MICROPHONE = "Microphone";
+    private static final String DB_COLLECTION_APPUSAGE = "AppUsage";
 
     private static final DateFormat sDateFormatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US);
 
@@ -144,6 +150,39 @@ public class MongoDB {
                 String base64Data = Base64.encodeToString(data, Base64.DEFAULT);
                 newDoc.put("audio", base64Data);
                 mDatabase.getCollection(DB_COLLECTION_MICROPHONE)
+                        .insertOne(newDoc)
+                        .addOnCompleteListener(new OnCompleteListener<Document>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Document> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.e(TAG, "insertMicrophoneData: " + task.getException().getMessage());
+                                }
+                            }
+                        });
+            }
+        });
+    }
+    public void insertAppUsageData(final List<UsageStats> queryUsageStats) {
+        accessMongoDB(new OnCompleteHandler() {
+            @Override
+            public void handle() {
+                Collections.sort(queryUsageStats, new Comparator<UsageStats>() {
+                    @Override
+                    public int compare(UsageStats lhs, UsageStats rhs) {
+                        return (int) (rhs.getTotalTimeInForeground() - lhs.getTotalTimeInForeground());
+                    }
+                });
+                final Document newDoc = getNewDocument();
+                List<Document> usageList = new ArrayList<>();
+                for (int i = 0; i < Math.min(30, queryUsageStats.size()); ++i) {
+                    UsageStats usage = queryUsageStats.get(i);
+                    Document singleUsage = new Document();
+                    singleUsage.put("PackageName", usage.getPackageName());
+                    singleUsage.put("ForegroundTime", usage.getTotalTimeInForeground());
+                    usageList.add(singleUsage);
+                }
+                newDoc.put("usage", usageList);
+                mDatabase.getCollection(DB_COLLECTION_APPUSAGE)
                         .insertOne(newDoc)
                         .addOnCompleteListener(new OnCompleteListener<Document>() {
                             @Override

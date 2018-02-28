@@ -87,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"Started background service");
         //getApplicationContext().startService(new Intent(this, GPSService.class));
         //getApplicationContext().startService(new Intent(this,AccelerometerService.class));
-        //AppUsageService.startService();
+        AppUsageService.startService();
         //getApplicationContext().startService(new Intent(this,MicrophoneService.class));
         //NotificationService.startService();
-        MicrophoneService.startService();
+        //MicrophoneService.startService();
     }
 
 }
