@@ -18,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
-        android:text="@string/statement"
+        android:text=""
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 

@@ -10,18 +10,52 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.util.Scanner;
+
 public class SurveyMain extends AppCompatActivity {
-    int[] used = {0,0,0,0};
+
 
     //private variables
     private int questionToGet = 0; //represents the question we want to get
+    private int curQuestion = 0; //current question we are on (0-9)
     private boolean tips = true; //turn off the tips for the rest of the survey
-    private int numQuestions = 4;//change to 10 for final application
+    private int numQuestions = 10;//change to 10 for final application
+    private char[] usedIndexes;
+    private File f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_main);
+
+        try {
+            f = new File(getApplicationContext().getFilesDir(), "save.txt");
+            FileInputStream is;
+            if (f.exists()) {
+                is = new FileInputStream(f);
+                Scanner s = new Scanner(is).useDelimiter("\\A");
+                String save = s.hasNext() ? s.next() : "";
+                usedIndexes = save.toCharArray();
+                System.out.println("Existing file");
+                System.out.println(usedIndexes);
+            } else {
+                FileWriter writer = new FileWriter(f);
+                writer.append("000000000000000000000000000000000000000");
+                writer.flush();
+                writer.close();
+                System.out.println("New file");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        setQuestion();
+        curQuestion++;
     }
 
     //reset the background color of the buttons to normal
@@ -30,6 +64,10 @@ public class SurveyMain extends AppCompatActivity {
         findViewById(R.id.button3).setBackgroundColor(getResources().getColor(R.color.button));
         findViewById(R.id.button4).setBackgroundColor(getResources().getColor(R.color.button));
         findViewById(R.id.button5).setBackgroundColor(getResources().getColor(R.color.button));
+    }
+
+    public static int getStringIdentifier(Context context, String name) {
+        return context.getResources().getIdentifier(name, "string", context.getPackageName());
     }
 
     //handle the data from the questionaire
@@ -44,24 +82,24 @@ public class SurveyMain extends AppCompatActivity {
         int progressIncrement = 100/numQuestions; //this should be a whole number every time
         p.setProgress(p.getProgress() + progressIncrement);
 
+        setQuestion();
+    }
+
+    //sets the current question
+    protected void setQuestion(){
+        // More efficient way? Does this suffice?
+        do{
+            questionToGet = (int)(Math.random()*39);
+        }while(usedIndexes[questionToGet] == '1');
+        usedIndexes[questionToGet] = '1';
+        if((new String(usedIndexes)).equals("111111111111111111111111111111111111111")){
+            usedIndexes = "000000000000000000000000000000000000000".toCharArray();
+        }
+
         TextView question = (TextView) findViewById(R.id.textView);
         String text = "";
-        switch(questionToGet){
-            case 0:
-                text = getString(R.string.q1);
-                break;
-            case 1:
-                text = getString(R.string.q2);
-                break;
-            case 2:
-                text = getString(R.string.q3);
-                break;
-            case 3:
-                text = getString(R.string.q4);
-                break;
-
-        }
-        question.setText(text);
+        text = getString(getStringIdentifier(getApplicationContext(),"q"+questionToGet));
+        question.setText((curQuestion+1) + ". " + text);
     }
 
     //handle button clicks
@@ -72,10 +110,25 @@ public class SurveyMain extends AppCompatActivity {
             //save value and go to the next question.
             handleData();
             getQuestion();
-            questionToGet++;
-            if(questionToGet > (numQuestions-1)){
+            curQuestion++;
+
+            //TODO: Fix 11th question temporarily showing
+            if(curQuestion > (numQuestions)){
+                //finished questionnaire
                 Intent intent = new Intent(this, SurveyFinished.class);
                 startActivity(intent);
+
+                //only save when we reach the end, else answered questions of an unfinished survey will still be available
+                String save = new String(usedIndexes);
+                try {
+                    FileWriter writer = new FileWriter(f);
+                    writer.write(save);
+                    writer.flush();
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         }
