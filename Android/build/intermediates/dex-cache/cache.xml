@@ -1,2 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\play-services-gcm-11.6.0.aar\1fb26bed61cafe3a929429cbfb5d0dfd\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2e77ffa091c317add00f041b0f152412099b9939">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.6.0.aar\4323bec529be096504b042560c7c3b09\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="729a6a1975c19d7461378172c7932f5c57f1c3fe">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\081710712b21c24d1178d2572427c436\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.2.0.aar\4199db3c54cabb792ab06aea68552fac\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\play-services-base-11.6.0.aar\658f2465c3e126dc7ceb1d7cbae01f45\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="863b37c463df79f340b5d83bbbfc63ad25612e01">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.0.1\36e5996abe8655a6471b82af5ac1cd6786aecf85\jackson-annotations-2.0.1.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="36e5996abe8655a6471b82af5ac1cd6786aecf85">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.19\a8f23f65fc1e522ee4a1a697ee569901a46741fa\library-1.0.19.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\org.mongodb\bson\3.5.0\b639bed341c069622c39f14c5ad5bd42b4655337\bson-3.5.0.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b639bed341c069622c39f14c5ad5bd42b4655337">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.3.0.aar\86c96b7cfeca0179146ed5a715a9c6c6\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.5\6c6c702c89bfff3cd9e80b04d668c5e190d588c6\commons-lang3-3.5.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6c6c702c89bfff3cd9e80b04d668c5e190d588c6">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.3.0.aar\324042501f904492a9f82d03ed1b95ad\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.0.1\1d160beb3f8924d5b98d03d94a149021146f71cc\jackson-databind-2.0.1.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1d160beb3f8924d5b98d03d94a149021146f71cc">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\support-compat-25.2.0.aar\aaa48206289f3e8b3c039f50d048afbf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.3.0.aar\8404e31421f5cfe0a0ffa34aa82958c1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\support-fragment-25.2.0.aar\8b04339150441483439a9e2e59f53bf5\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.2.0.aar\a009fdddc7fe3f6400f2a2caa5b6b784\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\support-v4-25.2.0.aar\fbfcc697b0c03c0ed9f6b390e0169273\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\play-services-iid-11.6.0.aar\a6150ac9620a9c43d9718f5a7e7df16a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f7b0e8bbef30cef79d7bb54bd4f671e3663bc7f4">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.0.1\481d14ec21e034ed45217c4854dbbf15940ce108\jackson-core-2.0.1.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="481d14ec21e034ed45217c4854dbbf15940ce108">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\com.android.support.constraint\constraint-layout-solver\1.0.2\b9cd8fc6bd15cb915735d34535db30ece0c44603\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\17.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\stitch-2.1.7.aar\989d059e158850aa121ef803f90b0e1f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3d24e7b00517165f1d472b64d77b75adb8d3d455">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.6.0.aar\4c2488173be47d0b87f6a803658cae6a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="869a1d15fa9d8e8aa36587b042f553c1baea46bc">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.2.0.aar\822206932ffb2fb67ecfc21a72c26c97\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.0.2\b9ef4342c934a1a8b107506273dc8061662a322\support-annotations-27.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0b9ef4342c934a1a8b107506273dc8061662a322">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Joseph Sutorus\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\4f32e50b9d4bd31b52c0fbbc886dcbd4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="14bfdbf5594d4d7c320de20831849050788ab1e3">
+        <dex dex="C:\Users\Joseph Sutorus\Documents\GitHub\moodnetwork\Android\app\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+
+</items>
