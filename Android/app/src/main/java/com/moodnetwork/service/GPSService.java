@@ -81,4 +81,8 @@ public class GPSService extends Service {
         Context context = MoodNetworkApplication.getContext();
         context.startService(new Intent(context,GPSService.class));
     }
+    public static void stopService() {
+        Context context = MoodNetworkApplication.getContext();
+        context.stopService(new Intent(context, GPSService.class));
+    }
 }

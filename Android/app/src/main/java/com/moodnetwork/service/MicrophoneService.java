@@ -112,4 +112,8 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
         Context context = MoodNetworkApplication.getContext();
         context.startService(new Intent(context,MicrophoneService.class));
     }
+    public static void stopService() {
+        Context context = MoodNetworkApplication.getContext();
+        context.stopService(new Intent(context, MicrophoneService.class));
+    }
 }

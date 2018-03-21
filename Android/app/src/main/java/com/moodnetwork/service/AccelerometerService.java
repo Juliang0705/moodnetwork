@@ -101,5 +101,9 @@ public class AccelerometerService extends Service {
         Context context = MoodNetworkApplication.getContext();
         context.startService(new Intent(context,AccelerometerService.class));
     }
+    public static void stopService() {
+        Context context = MoodNetworkApplication.getContext();
+        context.stopService(new Intent(context, AccelerometerService.class));
+    }
 }
 
