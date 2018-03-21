@@ -28,6 +28,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import com.moodnetwork.MoodNetworkApplication;
+import com.moodnetwork.database.Model.Questionnaire;
 
 public class MongoDB {
     private static final String TAG = MongoDB.class.getCanonicalName();
@@ -41,6 +42,7 @@ public class MongoDB {
     private static final String DB_COLLECTION_ACCELEROMETER = "Accelerometer";
     private static final String DB_COLLECTION_MICROPHONE = "Microphone";
     private static final String DB_COLLECTION_APPUSAGE = "AppUsage";
+    private static final String DB_COLLECTION_QUESTIONNAIRE = "Questionnaire";
 
     private static final DateFormat sDateFormatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US);
 
@@ -189,6 +191,32 @@ public class MongoDB {
                             public void onComplete(@NonNull Task<Document> task) {
                                 if (!task.isSuccessful()) {
                                     Log.e(TAG, "insertMicrophoneData: " + task.getException().getMessage());
+                                }
+                            }
+                        });
+            }
+        });
+    }
+
+    public void insertQuestionnaireData(final List<Questionnaire> questionnaireList) {
+        accessMongoDB(new OnCompleteHandler() {
+            @Override
+            public void handle() {
+                final Document newDoc = getNewDocument();
+                List<Document> questionnaireDocList = new ArrayList<>();
+                for (Questionnaire q : questionnaireList) {
+                    Document singleQuestionnaireDoc = new Document();
+                    singleQuestionnaireDoc.put(q.getQuestion(), q.getAnswer());
+                    questionnaireDocList.add(singleQuestionnaireDoc);
+                }
+                newDoc.put("questionnaire", questionnaireDocList);
+                mDatabase.getCollection(DB_COLLECTION_QUESTIONNAIRE)
+                        .insertOne(newDoc)
+                        .addOnCompleteListener(new OnCompleteListener<Document>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Document> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.e(TAG, "insertQuestionnaireData: " + task.getException().getMessage());
                                 }
                             }
                         });

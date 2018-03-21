@@ -11,6 +11,7 @@ import android.util.Log;
 import android.app.usage.*;
 import java.util.*;
 
+import com.moodnetwork.database.Model.Questionnaire;
 import com.moodnetwork.database.MongoDB;
 import com.moodnetwork.service.*;
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"Started background service");
         //getApplicationContext().startService(new Intent(this, GPSService.class));
         //getApplicationContext().startService(new Intent(this,AccelerometerService.class));
-        AppUsageService.startService();
+        //AppUsageService.startService();
         //getApplicationContext().startService(new Intent(this,MicrophoneService.class));
         //NotificationService.startService();
         //MicrophoneService.startService();
