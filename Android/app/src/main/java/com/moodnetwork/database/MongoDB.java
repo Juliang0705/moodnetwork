@@ -233,7 +233,7 @@ public class MongoDB {
             public void handle() {
                 final Document newDoc = getNewDocument();
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
-                if (img.compress(Bitmap.CompressFormat.JPEG, 0, out)) {
+                if (img.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
                     byte[] data = out.toByteArray();
                     String base64Data = Base64.encodeToString(data, Base64.DEFAULT);
                     newDoc.put("image", base64Data);
