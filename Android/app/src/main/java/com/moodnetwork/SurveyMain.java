@@ -9,12 +9,18 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+
+import com.moodnetwork.database.Model.Questionnaire;
+import com.moodnetwork.database.MongoDB;
 
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SurveyMain extends AppCompatActivity {
@@ -26,7 +32,9 @@ public class SurveyMain extends AppCompatActivity {
     private boolean tips = true; //turn off the tips for the rest of the survey
     private int numQuestions = 10;//change to 10 for final application
     private char[] usedIndexes;
+    private String ansQuestion = "";
     private File f;
+    List<Questionnaire> questionnaireList = new ArrayList<Questionnaire>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +77,6 @@ public class SurveyMain extends AppCompatActivity {
         return context.getResources().getIdentifier(name, "string", context.getPackageName());
     }
 
-    //handle the data from the questionaire
-    protected void handleData(){
-        //get the question and answer and store both in the backend
-    }
-
     //get a new question and display it, increment progress bar
     protected void getQuestion(){
         resetbuttons();
@@ -98,6 +101,7 @@ public class SurveyMain extends AppCompatActivity {
         TextView question = (TextView) findViewById(R.id.textView);
         String text = "";
         text = getString(getStringIdentifier(getApplicationContext(),"q"+questionToGet));
+        ansQuestion = text;
         question.setText((curQuestion+1) + ". " + text);
     }
 
@@ -106,12 +110,14 @@ public class SurveyMain extends AppCompatActivity {
         //save the value for the survey
        ColorDrawable button =  (ColorDrawable) view.getBackground();
         if( button.getColor() == getResources().getColor(R.color.colorAccent)){
-            //save value and go to the next question.
-            handleData();
+            //save value and go to the next question
+            String ans = ((Button)view).getText().toString();
+            Questionnaire curQA = new Questionnaire(ansQuestion, ans);
+            questionnaireList.add(curQA);
+
             getQuestion();
             curQuestion++;
 
-            //TODO: Fix 11th question temporarily showing
             if(curQuestion > (numQuestions)){
                 //finished questionnaire
                 Intent intent = new Intent(this, SurveyFinished.class);
@@ -128,6 +134,8 @@ public class SurveyMain extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                //MongoDB.getInstance().insertQuestionnaireData(final List<Questionnaire> questionnaireList))
+                MongoDB.getInstance().insertQuestionnaireData(questionnaireList);
             }
 
         }
