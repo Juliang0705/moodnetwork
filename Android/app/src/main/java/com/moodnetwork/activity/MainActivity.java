@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                         });
                         s.show();
+
                     }
                 }
                 return;
@@ -211,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == RESULT_OK) {
                 Bitmap image = (Bitmap) data.getExtras().get("data");
+                MongoDB.getInstance().insertSelfieData(image);
             }
             // do whatever you want with the image now}
 

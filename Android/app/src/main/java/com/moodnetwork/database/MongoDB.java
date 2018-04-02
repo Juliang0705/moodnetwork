@@ -13,10 +13,12 @@ import org.bson.Document;
 import android.app.usage.UsageStats;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,6 +45,7 @@ public class MongoDB {
     private static final String DB_COLLECTION_MICROPHONE = "Microphone";
     private static final String DB_COLLECTION_APPUSAGE = "AppUsage";
     private static final String DB_COLLECTION_QUESTIONNAIRE = "Questionnaire";
+    private static final String DB_COLLECTION_SELFIE = "Selfie";
 
     private static final DateFormat sDateFormatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US);
 
@@ -223,5 +226,34 @@ public class MongoDB {
             }
         });
     }
+
+    public void insertSelfieData(final Bitmap img) {
+        accessMongoDB(new OnCompleteHandler() {
+            @Override
+            public void handle() {
+                final Document newDoc = getNewDocument();
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                if (img.compress(Bitmap.CompressFormat.JPEG, 0, out)) {
+                    byte[] data = out.toByteArray();
+                    String base64Data = Base64.encodeToString(data, Base64.DEFAULT);
+                    newDoc.put("image", base64Data);
+                    mDatabase.getCollection(DB_COLLECTION_SELFIE)
+                            .insertOne(newDoc)
+                            .addOnCompleteListener(new OnCompleteListener<Document>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Document> task) {
+                                    if (!task.isSuccessful()) {
+                                        Log.e(TAG, "insertQuestionnaireData: " + task.getException().getMessage());
+                                    }
+                                }
+                            });
+                }else {
+                    Log.e(TAG, "insertQuestionnaireData: Compressing image file failed");
+                }
+            }
+        });
+    }
+
+
 
 }
