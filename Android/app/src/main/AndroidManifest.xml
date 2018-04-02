@@ -6,24 +6,47 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-    <uses-feature android:name="android.hardware.sensor.accelerometer"
+    <uses-feature android:name="android.hardware.sensor.accelerometer"/>
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
+        android:name=".MoodNetworkApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".MoodNetworkApplication">
+        android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity android:name=".SurveyFinished" />
+        <activity
+            android:name=".HelpPage"
+            android:parentActivityName=".activity.MainActivity">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
         </activity>
 
         <service android:name=".service.GPSService" />
@@ -32,6 +55,20 @@
                  android:permission="android.permission.BIND_JOB_SERVICE" />
         <service android:name=".service.MicrophoneService" />
         <receiver android:name=".service.NotificationService$NotificationReceiver"/>
+        <activity android:name=".SurveyMain"/>
+
+
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.moodnetwork.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

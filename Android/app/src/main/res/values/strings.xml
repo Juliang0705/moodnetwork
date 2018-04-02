@@ -1,3 +1,61 @@
 <resources>
     <string name="app_name">moodnetwork</string>
+    <string name="statement">I am presently worrying over possible misfortunes.</string>
+    <string name="button_4">Very Much So</string>
+    <string name="button_3">Moderately So</string>
+    <string name="button_2">Somewhat</string>
+    <string name="button_1">Not at all</string>
+    <string name="q0">I feel calm.</string>
+    <string name="q1">I feel secure.</string>
+    <string name="q2">I feel tense.</string>
+    <string name="q3">I feel strained.</string>
+    <string name="q4">I feel at ease.</string>
+    <string name="q5">I feel upset.</string>
+    <string name="q6">I get in a state of tension or turmoil as I think over my recent concerns and interests.</string>
+    <string name="q7">I am presently worrying over possible misfortunes.</string>
+    <string name="q8">I feel satisfied.</string>
+    <string name="q9">I feel frightened.</string>
+    <string name="q10">I feel comfortable.</string>
+    <string name="q11">I feel self-confident.</string>
+    <string name="q12">I feel nervous.</string>
+    <string name="q13">I am jittery.</string>
+    <string name="q14">I feel indecisive.</string>
+    <string name="q15">I am relaxed.</string>
+    <string name="q16">I feel content.</string>
+    <string name="q17">I am worried.</string>
+    <string name="q18">I feel confused.</string>
+    <string name="q19">I feel steady.</string>
+    <string name="q20">I feel pleasant.</string>
+    <string name="q21">I feel nervous and restless.</string>
+    <string name="q22">I feel satisfied with myself.</string>
+    <string name="q23">I wish I could be as happy as others seem to be.</string>
+    <string name="q24">I feel like a failure.</string>
+    <string name="q25">I feel rested.</string>
+    <string name="q26">I am "calm, cool, and collected."</string>
+    <string name="q27">I feel that difficulties are piling up so that I cannot overcome them.</string>
+    <string name="q28">I worry too much over something that doesn\'t really matter.</string>
+    <string name="q29">I am happy.</string>
+    <string name="q30">I have disturbing thoughts.</string>
+    <string name="q31">I lack self-confidence.</string>
+    <string name="q32">I feel secure.</string>
+    <string name="q33">I make decisions easily.</string>
+    <string name="q34">I feel inadequate.</string>
+    <string name="q35">I am content.</string>
+    <string name="q36">Some unimportant thought runs through my mind and bothers me.</string>
+    <string name="q37">I take disappointments so keenly that I can\'t put them out of my mind.</string>
+    <string name="q38">I am a steady person.</string>
+    <string name="helpcontent">Mood Checker is an application for research purposes. The app will collect data for researchers
+        that will be used and analyzed in the future. By using Mood Checker you agree to sharing your data with these researchers.
+        You can disable some background activities at any time from the settings.
+        The survey is to be taken 3 times a day, and you will receive a notification when it is time to take it.
+        After completing the survey, you should take a picture of yourself.
+    </string>
+    <string name="survey">Survey</string>
+    <string name="photo">Photos</string>
+    <string name="about">About</string>
+    <string name="how_to_survey">Click on the icon to start the survey. You may move on to the next question by double tapping on your desired answer.
+        The progress bar at the top will show how many questions you have left. </string>
+    <string name="how_to_camera">Click on the camera icon to open the camera. Take a photo of your face including both the top of your head and
+        your chin in the picture. Approve the picture, and you will return to the home page.</string>
+
 </resources>

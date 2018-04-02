@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,8 +12,69 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.MainActivity">
 
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="16dp"
+        android:columnCount="2">
+
+        <ImageButton
+            android:id="@+id/survey_button"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            android:onClick="goToSurvey"
+            app:srcCompat="@drawable/ic_survey_action" />
+
+        <ImageButton
+            android:id="@+id/camera_button"
+            style="@android:style/Widget.DeviceDefault.ImageButton"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            android:onClick="openCamera"
+            app:srcCompat="@drawable/ic_camera_add" />
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            android:onClick="goToSettings"
+            app:srcCompat="@drawable/ic_settings" />
+
+        <ImageButton
+            android:id="@+id/help_button"
+            android:layout_columnWeight="1"
+            android:layout_margin="2dp"
+            android:layout_rowWeight="1"
+            android:background="@color/button"
+            android:onClick="goToHelpPage"
+            app:srcCompat="@drawable/ic_help" />
+    </GridLayout>
+
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:text="Last Survey:"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:text="No Data"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
 </RelativeLayout>
