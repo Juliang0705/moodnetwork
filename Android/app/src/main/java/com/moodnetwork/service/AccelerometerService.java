@@ -21,10 +21,12 @@ public class AccelerometerService extends Service {
 
     private class AcclerometerEventListener extends CountDownTimer implements SensorEventListener {
 
-        private static final double MAGNITUDE_THRESHOLD = 1;
+        private static final double MAGNITUDE_THRESHOLD = 0.7;
         private static final long TIMEOUT_IN_SECS = 60;
-        private double mAccelerationSum = 0;
-        private int mAccelerationCount = 0;
+        private double mXSum = 0;
+        private double mYSum = 0;
+        private double mZSum = 0;
+        private int mCount = 0;
 
         AcclerometerEventListener() {
             super(TIMEOUT_IN_SECS * 1000, TIMEOUT_IN_SECS * 1000);
@@ -32,15 +34,22 @@ public class AccelerometerService extends Service {
         }
         @Override
         public void onFinish() {
-            double average = 0;
+            double xAverage = 0;
+            double yAverage = 0;
+            double zAverage = 0;
             synchronized (this) {
-                average = mAccelerationSum / mAccelerationCount;
-                mAccelerationSum = 0;
-                mAccelerationCount = 0;
+                xAverage = mXSum / mCount;
+                yAverage = mYSum / mCount;
+                zAverage = mZSum / mCount;
+                mXSum = 0;
+                mYSum = 0;
+                mZSum = 0;
+                mCount = 0;
             }
-            Log.i(TAG, "Acceleration for the past 1 mins is " + average);
-            if (average >= MAGNITUDE_THRESHOLD) {
-                MongoDB.getInstance().insertAccelerometerData(average);
+            double magnitudeAverage = Math.sqrt(xAverage * xAverage + yAverage * yAverage + zAverage * zAverage);
+            Log.i(TAG, "Acceleration for the past 1 mins is " + magnitudeAverage);
+            if (magnitudeAverage >= MAGNITUDE_THRESHOLD) {
+                MongoDB.getInstance().insertAccelerometerData(xAverage, yAverage, zAverage);
             }
             start();
         }
@@ -53,10 +62,11 @@ public class AccelerometerService extends Service {
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
-            double magnitude = Math.sqrt(x * x + y * y + z * z);
             synchronized (this) {
-                mAccelerationSum += magnitude;
-                mAccelerationCount += 1;
+                mXSum += x;
+                mYSum += y;
+                mZSum += z;
+                mCount += 1;
             }
         }
         @Override

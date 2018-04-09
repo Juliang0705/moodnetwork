@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.Date;
+import java.util.TimeZone;
 import java.text.SimpleDateFormat;
 
 import com.moodnetwork.MoodNetworkApplication;
@@ -64,6 +65,7 @@ public class MongoDB {
         mStitchClient = new StitchClient(MoodNetworkApplication.getContext(), STITCH_APP_ID);
         mMongoClient = new MongoClient(mStitchClient, MONGO_SERVICE_PROVIDER);
         mDatabase = mMongoClient.getDatabase(DATABASE_NAME);
+        sDateFormatter.setTimeZone(TimeZone.getTimeZone("PST"));
         Log.i(TAG, "MongoDB instance created");
     }
 
@@ -128,12 +130,14 @@ public class MongoDB {
             }
         });
     }
-    public void insertAccelerometerData(final double mag){
+    public void insertAccelerometerData(final double x, final double y, final double z){
         accessMongoDB(new OnCompleteHandler() {
             @Override
             public void handle() {
                 final Document newDoc = getNewDocument();
-                newDoc.put("magnitude", mag);
+                newDoc.put("x", x);
+                newDoc.put("y", y);
+                newDoc.put("z", z);
                 mDatabase.getCollection(DB_COLLECTION_ACCELEROMETER)
                         .insertOne(newDoc)
                         .addOnCompleteListener(new OnCompleteListener<Document>() {
