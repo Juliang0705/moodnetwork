@@ -11,6 +11,7 @@ import android.widget.Switch;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import com.moodnetwork.service.*;
 
 public class Settings extends AppCompatActivity {
 
@@ -139,7 +140,6 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    NotificationService.stopService();
                 }
                 //Saves state to the shared preferences when the button is clicked
                 SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);

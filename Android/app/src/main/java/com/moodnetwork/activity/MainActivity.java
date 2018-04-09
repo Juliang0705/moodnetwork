@@ -17,6 +17,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.content.SharedPreferences;
 import android.app.usage.*;
 import java.util.*;
 
