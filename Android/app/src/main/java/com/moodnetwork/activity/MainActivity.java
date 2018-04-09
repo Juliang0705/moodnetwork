@@ -281,12 +281,27 @@ public class MainActivity extends AppCompatActivity {
     }
     private void startBackgroundServices() {
         Log.i(TAG,"Started background service");
-        //getApplicationContext().startService(new Intent(this, GPSService.class));
+
+        SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);
+        //creates the locations setting from the shared preferences
+        boolean locationKey = settings.getBoolean("lockey", false);
+        //creates the microphone setting from the shared preferences
+        boolean microphoneKey = settings.getBoolean("microkey", false);
+        //creates the push notification setting from the shared preferences
+        boolean pushNotificationKey = settings.getBoolean("pushkey", false);
+
+        if(locationKey == true) {
+            getApplicationContext().startService(new Intent(this, GPSService.class));
+        }
         //getApplicationContext().startService(new Intent(this,AccelerometerService.class));
         //AppUsageService.startService();
         //getApplicationContext().startService(new Intent(this,MicrophoneService.class));
-        //NotificationService.startService();
-        //MicrophoneService.startService();
+        if(pushNotificationKey == true) {
+            NotificationService.startService();
+        }
+        if(microphoneKey == true) {
+            MicrophoneService.startService();
+        }
     }
 
 }
