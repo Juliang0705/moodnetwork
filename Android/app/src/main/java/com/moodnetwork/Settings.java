@@ -58,6 +58,7 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    GPSService.startService();
                 }
                 else
                 {
@@ -68,6 +69,7 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    GPSService.stopService();
                 }
                 //Saves state to the shared preferences when the button is clicked
                 SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);
@@ -91,6 +93,7 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    MicrophoneService.startService();
                 }
                 else
                 {
@@ -101,6 +104,7 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    MicrophoneService.stopService();
                 }
                 //Saves state to the shared preferences when the button is clicked
                 SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);
@@ -124,6 +128,7 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    NotificationService.startService();
                 }
                 else
                 {
@@ -134,6 +139,7 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    NotificationService.stopService();
                 }
                 //Saves state to the shared preferences when the button is clicked
                 SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);
