@@ -12,12 +12,13 @@ import android.net.Uri;
 
 import com.moodnetwork.MoodNetworkApplication;
 import com.moodnetwork.database.MongoDB;
+import java.util.Random;
 
 
 public class MicrophoneService extends Service implements MediaRecorder.OnInfoListener {
     public static final String TAG = MicrophoneService.class.getCanonicalName();
     private static final int MAX_RECORD_DURATION_IN_SECS = 60;
-    private static final long RECORD_GAP_IN_SECS = 300;
+    private static final long RECORD_GAP_IN_SECS[] = {60,120,180,240,300,360,420,480,540,600};
     private MediaRecorder mRecorder;
     @Override
     public void onCreate() {
@@ -76,7 +77,8 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
             @Override
             public void run(){
                 try {
-                    Thread.sleep(RECORD_GAP_IN_SECS * 1000);
+                    long waitTime = RECORD_GAP_IN_SECS[new Random().nextInt(RECORD_GAP_IN_SECS.length)];
+                    Thread.sleep(waitTime * 1000);
                 } catch (InterruptedException e) {
                     Log.e(TAG, e.getMessage());
                 }
