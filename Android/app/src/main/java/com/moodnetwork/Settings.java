@@ -26,19 +26,24 @@ public class Settings extends AppCompatActivity {
 
         //Saves the state of the switch buttons
         SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);
-        //creates the locations setting from the shared preferences
-        boolean silentLoc = settings.getBoolean("lockey", false);
         //Get the initial state of location permissions by checking the permissions
+        SharedPreferences.Editor editor = settings.edit();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("lockey", true);
         }
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            editor.putBoolean("microkey", true);
+        }
+        //creates the locations setting from the shared preferences
+        boolean silentLoc = settings.getBoolean("lockey", false);
         //creates the microphone setting from the shared preferences
         boolean silentMicro = settings.getBoolean("microkey", false);
         //creates the push notification setting from the shared preferences
-        boolean silentPush = settings.getBoolean("pushkey", false);
+        boolean silentPush = settings.getBoolean("pushkey", true);
         locButton.setChecked(silentLoc);
         microButton.setChecked(silentMicro);
         pushButton.setChecked(silentPush);

@@ -9,7 +9,6 @@ import android.media.MediaRecorder;
 import android.media.MediaPlayer;
 import java.io.*;
 import android.net.Uri;
-import android.content.SharedPreferences;
 
 import com.moodnetwork.MoodNetworkApplication;
 import com.moodnetwork.database.MongoDB;
@@ -24,11 +23,6 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
     @Override
     public void onCreate() {
         Log.i(TAG, "Microphone Service is created");
-
-        SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("microkey", true);
-
         mRecorder = new MediaRecorder();
     }
     @Override
