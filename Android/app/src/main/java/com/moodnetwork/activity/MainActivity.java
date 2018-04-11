@@ -20,6 +20,9 @@ import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.content.SharedPreferences;
 import android.app.usage.*;
+
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.util.*;
 
 import com.moodnetwork.database.Model.Questionnaire;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     // Not sure what this return code is actually supposed to be besides a final int that's >= 0
     private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 0;
     private final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
+    private File f;
     private boolean cameraFunctionality = false;
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -179,13 +183,18 @@ public class MainActivity extends AppCompatActivity {
             startBackgroundServices();
         }
 
-        //this will be pulled from the database instead of an intent
         String message = "No Data";
-        Intent intent = getIntent();
-        if(intent.hasExtra(TIME_STAMP)) {
-            message = intent.getStringExtra(TIME_STAMP);
+        //get date from file saved on device
+        try {
+            f = new File(getApplicationContext().getFilesDir(), "lastsurvey.txt");
+            FileInputStream is = new FileInputStream(f);
+            Scanner s = new Scanner(is);
+            message = s.hasNext() ? s.nextLine() : "No Data"; //if the file is empty put no data
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        //this will stay the same when pulled from database
+        //set the date on the screen
         TextView textView = (TextView) findViewById(R.id.dateText);
         textView.setText(message);
         removeAllNotifications();
