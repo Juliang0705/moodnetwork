@@ -32,8 +32,8 @@ public class Settings extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            silentLoc = settings.getBoolean("lockey", true);
-
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("lockey", true);
         }
         //creates the microphone setting from the shared preferences
         boolean silentMicro = settings.getBoolean("microkey", false);

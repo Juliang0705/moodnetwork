@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.content.SharedPreferences;
 
 import com.moodnetwork.MoodNetworkApplication;
 import com.moodnetwork.database.MongoDB;
@@ -48,6 +49,11 @@ public class GPSService extends Service {
     @Override
     public void onCreate() {
         Log.i(TAG, "GPS service created");
+
+        SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("lockey", true);
+
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
