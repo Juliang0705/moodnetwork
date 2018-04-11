@@ -2,6 +2,7 @@ package com.moodnetwork.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -187,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         //this will stay the same when pulled from database
         TextView textView = (TextView) findViewById(R.id.dateText);
         textView.setText(message);
+        removeAllNotifications();
 
     }
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -304,5 +306,10 @@ public class MainActivity extends AppCompatActivity {
             MicrophoneService.startService();
         }
     }
+    private void removeAllNotifications() {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
+    }
+
 
 }
