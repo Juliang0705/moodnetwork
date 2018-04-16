@@ -46,7 +46,7 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
         player.start();
     }
     private String getOutputFilePath() {
-        File outputFile = new File(getApplicationContext().getFilesDir(), "TestAudio.mp3");
+        File outputFile = new File(getApplicationContext().getFilesDir(), "TestAudio.amr");
         return outputFile.getAbsolutePath();
     }
     private void startRecording() {
@@ -74,13 +74,14 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
         rescheduleRecording();
     }
     private void rescheduleRecording(){
-        Log.i(TAG, "Rescheduling recording");
         new Thread(){
             @Override
             public void run(){
                 try {
                     long waitTime = RECORD_GAP_IN_SECS[new Random().nextInt(RECORD_GAP_IN_SECS.length)];
                     Thread.sleep(waitTime * 1000);
+
+                    Log.i(TAG, "Rescheduling recording, wait for " + waitTime);
                 } catch (InterruptedException e) {
                     Log.e(TAG, e.getMessage());
                 }

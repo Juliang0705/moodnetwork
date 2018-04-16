@@ -304,13 +304,13 @@ public class MainActivity extends AppCompatActivity {
 
         getApplicationContext().startService(new Intent(this,AccelerometerService.class));
         AppUsageService.startService();
-        if(locationKey == true) {
+        if(locationKey == true && !GPSService.isRunning()) {
             GPSService.startService();
         }
-        if(pushNotificationKey == true) {
+        if(pushNotificationKey == true && !NotificationService.isRunning()) {
             NotificationService.startService();
         }
-        if(microphoneKey == true) {
+        if(microphoneKey == true && !MicrophoneService.isRunning()) {
             MicrophoneService.startService();
         }
     }
