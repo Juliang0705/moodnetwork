@@ -302,12 +302,11 @@ public class MainActivity extends AppCompatActivity {
         //creates the push notification setting from the shared preferences
         boolean pushNotificationKey = settings.getBoolean("pushkey", false);
 
+        getApplicationContext().startService(new Intent(this,AccelerometerService.class));
+        AppUsageService.startService();
         if(locationKey == true) {
-            getApplicationContext().startService(new Intent(this, GPSService.class));
+            GPSService.startService();
         }
-        //getApplicationContext().startService(new Intent(this,AccelerometerService.class));
-        //AppUsageService.startService();
-        //getApplicationContext().startService(new Intent(this,MicrophoneService.class));
         if(pushNotificationKey == true) {
             NotificationService.startService();
         }

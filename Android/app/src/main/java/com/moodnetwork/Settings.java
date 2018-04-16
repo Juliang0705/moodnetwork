@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.midi.MidiDevice;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,6 +65,9 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    if (!GPSService.isRunning()) {
+                        GPSService.startService();
+                    }
                 }
                 else
                 {
@@ -98,6 +102,9 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    if (!MicrophoneService.isRunning()) {
+                        MicrophoneService.startService();
+                    }
                 }
                 else
                 {
@@ -132,6 +139,9 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    if (!NotificationService.isRunning()){
+                        NotificationService.startService();
+                    }
                 }
                 else
                 {
@@ -142,6 +152,7 @@ public class Settings extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    NotificationService.stopService();
                 }
                 //Saves state to the shared preferences when the button is clicked
                 SharedPreferences settings = getSharedPreferences("com.mobileapp.smartapplocker", 0);

@@ -21,7 +21,7 @@ public class GPSService extends Service {
     public static final String TAG = GPSService.class.getCanonicalName();
     public static final int GPS_UPDATE_INTERVAL = 60000; //every minute
     public static final float GPS_MIN_DISTANCE = 10; // meters
-
+    private static boolean running = false;
     private LocationManager mLocationManager;
 
     private LocationListener mNetworkLocationListener = new LocationListener() {
@@ -80,9 +80,15 @@ public class GPSService extends Service {
     public static void startService() {
         Context context = MoodNetworkApplication.getContext();
         context.startService(new Intent(context,GPSService.class));
+        running = true;
     }
     public static void stopService() {
         Context context = MoodNetworkApplication.getContext();
         context.stopService(new Intent(context, GPSService.class));
+        running = false;
+    }
+
+    public static boolean isRunning() {
+        return running;
     }
 }

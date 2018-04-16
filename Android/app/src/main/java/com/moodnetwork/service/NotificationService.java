@@ -11,17 +11,19 @@ import android.app.AlarmManager;
 import java.util.Calendar;
 import com.moodnetwork.MoodNetworkApplication;
 import com.moodnetwork.R;
+import com.moodnetwork.SurveyMain;
 import com.moodnetwork.activity.MainActivity;
 
 public class NotificationService {
     private static final String TAG = NotificationService.class.getCanonicalName();
+    private static boolean running = false;
 
     public static class NotificationReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Pushing notification");
             PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                    new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                    new Intent(context, SurveyMain.class), PendingIntent.FLAG_UPDATE_CURRENT);
             NotificationCompat.Builder notificationBuilder =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.ic_launcher)
@@ -49,5 +51,20 @@ public class NotificationService {
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_HOUR * 8, alarmIntent);
+        running = true;
+    }
+
+    public static void stopService() {
+        Log.i(TAG, "Stopping Notification Service");
+        Context context = MoodNetworkApplication.getContext();
+        Intent intent = new Intent(context, NotificationService.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1253, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+        running = false;
+    }
+
+    public static boolean isRunning() {
+        return running;
     }
 }

@@ -20,6 +20,8 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
     private static final int MAX_RECORD_DURATION_IN_SECS = 60;
     private static final long RECORD_GAP_IN_SECS[] = {60,120,180,240,300,360,420,480,540,600};
     private MediaRecorder mRecorder;
+    private static boolean running = false;
+
     @Override
     public void onCreate() {
         Log.i(TAG, "Microphone Service is created");
@@ -96,7 +98,9 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
                 dis.readFully(fileData);
                 dis.close();
                 MongoDB.getInstance().insertMicrophoneData(fileData);
+                //playAudio(filepath);
                 audioFile.delete();
+
             }catch(IOException e ) {
                 Log.e(TAG, e.getMessage());
             }
@@ -113,9 +117,15 @@ public class MicrophoneService extends Service implements MediaRecorder.OnInfoLi
     public static void startService() {
         Context context = MoodNetworkApplication.getContext();
         context.startService(new Intent(context,MicrophoneService.class));
+        running = true;
     }
     public static void stopService() {
         Context context = MoodNetworkApplication.getContext();
         context.stopService(new Intent(context, MicrophoneService.class));
+        running = false;
+    }
+
+    public static boolean isRunning() {
+        return running;
     }
 }
