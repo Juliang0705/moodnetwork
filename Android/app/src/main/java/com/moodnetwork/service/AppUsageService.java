@@ -38,7 +38,9 @@ public class AppUsageService extends JobService {
                         ": total foreground time=" + usage.getTotalTimeInForeground());
             }
             jobFinished(params[0], true);
-            MongoDB.getInstance().insertAppUsageData(queryUsageStats);
+            if (queryUsageStats.size() != 0) {
+                MongoDB.getInstance().insertAppUsageData(queryUsageStats);
+            }
             return null;
         }
     }
